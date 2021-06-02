@@ -77,24 +77,26 @@ export const Header = () => {
   }, [open]);
   
   return (
-    <div >
-    <row>
-    <div className="col-lg-12 main-header" >
-      <div className="col-lg-4 title">
-         WNFT 
-      </div>
-      <div className=" col-md-6 input-group rounded search">
-        <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
-        aria-describedby="search-addon" />
-      </div>
-      <div className= "col-lg-4 nav-bar" >
-        <button className="nav-item" onClick={handleClick}> Marketplace </button>
-        <div style={{zIndex: "1"}}>
+    <div className="main-header">
+     <nav class="navbar navbar-expand-lg navbar-light ">
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand ml-5" href="#" style={{    fontSize: "40px",
+    fontWeight: "500", fontFamily:"sans-serif"}}><span style={{color:"cornflowerblue"}}>W</span><span style={{color:"red"}}>N</span><span style={{color:"green"}}>F</span><span style={{color:"yellow"}}>T</span></a>
+      <input class="form-control mr-sm-2 form-control rounded" type="search" placeholder="Search" aria-label="Search" />
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="#" onClick={handleClick}> Marketplace <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" style={{zIndex: "1"}}>
         <Button
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onMouseEnter = {handleToggle}
+          class="nav-link"
         >
           <AccountCircleIcon/>
         </Button>
@@ -105,7 +107,7 @@ export const Header = () => {
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
           >
           <Paper>
-            <ClickAwayListener onHide={handleClose}>
+            <ClickAwayListener onClickAway={handleClose}>
               <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                 <MenuItem onClick={handleClose}> My Profile</MenuItem>
                 <MenuItem onClick={handleCollection}>My Collection</MenuItem>
@@ -118,29 +120,28 @@ export const Header = () => {
         </Grow>
           )}
         </Popper>
-      </div>
-         <Button variant="primary" className="nav-item" onClick={handleShow}>
+      </li>
+      <li class="nav-item">
+          <Button variant="primary" className="nav-link" onClick={handleShow}>
           <AccountBalanceWalletIcon/>
       </Button>
       <Modal show={show} onHide={HandleClose} animation={false}>
         <Modal.Header closeButton>
-        <Modal.Title><div><AccountCircleIcon className="wallet-icon"/> {account}</div></Modal.Title>
+        <Modal.Title><div><AccountCircleIcon className="wallet-icon"/><span> {account}</span></div></Modal.Title>
         </Modal.Header>
         <Modal.Body >
          <div className="wallet">
          <span className="total"> Total balance </span> 
          <br/>
-         <span className="balance" style={{whiteSpace :"nowrap"}}>  <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="3%"></img> {balance} ETH</span> 
+         <span className="balance" style={{whiteSpace :"nowrap"}}>  $0.000<img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="3%"></img> {balance} ETH</span> 
          </div>
          <button className="btn-btn-primary add-funds"> Add Funds </button> 
         </Modal.Body>
-      </Modal>
-       </div>
-       
-    </div>
-    </row>
-   
-
+        </Modal>
+      </li>
+    </ul>
+  </div>
+</nav>
 </div>
   )
 }
