@@ -100,6 +100,7 @@ export const Header = () => {
         >
           <AccountCircleIcon/>
         </Button>
+        <div className="profile">
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
@@ -107,8 +108,8 @@ export const Header = () => {
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
           >
           <Paper>
-            <ClickAwayListener onClickAway={handleClose}>
-              <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+            <ClickAwayListener>
+              <MenuList autoFocusItem={open} id="menu-list-grow">
                 <MenuItem onClick={handleClose}> My Profile</MenuItem>
                 <MenuItem onClick={handleCollection}>My Collection</MenuItem>
                 <MenuItem onClick={handleClose}>My Favorites</MenuItem>
@@ -120,6 +121,7 @@ export const Header = () => {
         </Grow>
           )}
         </Popper>
+        </div>
       </li>
       <li class="nav-item">
           <Button variant="primary" className="nav-link" onClick={handleShow}>
@@ -133,7 +135,7 @@ export const Header = () => {
          <div className="wallet">
          <span className="total"> Total balance </span> 
          <br/>
-         <span className="balance" style={{whiteSpace :"nowrap"}}>  $0.000<img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="3%"></img> {balance} ETH</span> 
+         <span className="balance" style={{whiteSpace :"nowrap"}}>  $0.000<img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="2%"></img> {balance} ETH</span> 
          </div>
          <button className="btn-btn-primary add-funds"> Add Funds </button> 
         </Modal.Body>
