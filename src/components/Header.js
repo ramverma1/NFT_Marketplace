@@ -84,45 +84,23 @@ export const Header = () => {
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <a class="navbar-brand ml-5" href="#" style={{    fontSize: "40px",
-    fontWeight: "500", fontFamily:"sans-serif"}}><span style={{color:"cornflowerblue"}}>W</span><span style={{color:"red"}}>N</span><span style={{color:"green"}}>F</span><span style={{color:"yellow"}}>T</span></a>
+    fontWeight: "500", fontFamily:"cursive",    textShadow: "2px 2px 5px" }}><span>W</span><span style={{color:"red"}}>N</span><span >F</span><span style={{color:"yellow"}}>T</span></a>
       <input class="form-control mr-sm-2 form-control rounded" type="search" placeholder="Search" aria-label="Search" />
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
         <a class="nav-link" href="#" onClick={handleClick}> Marketplace <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" style={{zIndex: "1"}}>
-        <Button
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onMouseEnter = {handleToggle}
-          class="nav-link"
-        >
-          <AccountCircleIcon/>
-        </Button>
-        <div className="profile">
-        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-          >
-          <Paper>
-            <ClickAwayListener>
-              <MenuList autoFocusItem={open} id="menu-list-grow">
-                <MenuItem onClick={handleClose}> My Profile</MenuItem>
-                <MenuItem onClick={handleCollection}>My Collection</MenuItem>
-                <MenuItem onClick={handleClose}>My Favorites</MenuItem>
-                <MenuItem onClick={handleClose}>My Account Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </MenuList>
-            </ClickAwayListener>
-          </Paper>
-        </Grow>
-          )}
-        </Popper>
-        </div>
+      <div class="dropdown">
+      <li class="nav-item"><a class="nav-link" href="#"><AccountCircleIcon/> </a> 
+        <div class="dropdown-content">
+          <a href="#">My Profile</a>
+          <a  href="#" onClick={handleCollection}>My Collection </a> 
+          <a  href="#">My Favourites </a>
+          <a  href="#">My Account Settings </a>
+          <a  href="#">Log out </a>   
+        </div> 
       </li>
+      </div>  
       <li class="nav-item">
           <Button variant="primary" className="nav-link" onClick={handleShow}>
           <AccountBalanceWalletIcon/>

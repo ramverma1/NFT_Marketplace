@@ -165,13 +165,21 @@ code {
 
 .collection-sidenav
 {
-  height: 700px;
-  background-color: white;
+    overflow-y: hidden !important;
+    background-color: rgb(251, 253, 255);
+    border-right: 1px solid rgb(229, 232, 235);
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 72px;
+    padding: 4px 8px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 .collection-right
 {
-  top: -683px;
-  left: -300px;
+  display: flex;
 }
 .collection-card{
     width: 20%;
@@ -350,6 +358,8 @@ label{
 }
 .navbar-light .navbar-nav .nav-link {
     color: black;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .featured-background{
@@ -421,6 +431,9 @@ label{
     padding: 20px 12px;
     user-select: none;
 }
+ .collection-filter :hover{
+  background-color:gainsboro !important;
+}
 .FeaturedFilter--items {
     display: flex;
     flex-flow: wrap;
@@ -468,3 +481,50 @@ label{
   
   top: 437px;
 }
+.modal{
+    justify-content: center !important;
+    display: flex;
+    align-items: center !important;
+    
+}
+.MuiBackdrop-root{
+  opacity: 0.3 !important;
+}
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #727070;
+  padding: 16px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
