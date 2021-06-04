@@ -29,15 +29,7 @@ export const Collection = () => {
    const [message, setmessage] = useState(null)
    const [isMessage, setIsMessage] = useState(false)
    const [messageType, setMessageType] = useState("success")
-   const [show, setShow] = React.useState(false);
-
-  const handleOpen = () => {
-    setShow(true);
-  };
-
-  const handleClose = () => {
-    setShow(false);
-  }
+ 
    const onChangePicture = e => {
     if (e.target.files[0]) {
       console.log("picture: ", e.target.files);
@@ -83,15 +75,15 @@ export const Collection = () => {
   
   return (
     <div className="row">
-    <div className="col-lg-3 collection-sidenav filter ">
+    <div className="col-lg-2 collection-sidenav filter ">
     <div className="collection-filter ml-3">
         <Typography className="heading"> <ListIcon className="mr-3"/>  My Payouts</Typography>
         <Typography className="heading"> <StoreIcon className="mr-3"/>  My Collections</Typography>
         <Typography className="heading"> <InfoIcon className="mr-3"/>  Community & Help</Typography>
        </div> 
       </div>
-      <div className="col-lg-9 mt-5">
-        <h4>My Collections</h4>
+      <div className="col-lg-10 collection-right mt-5">
+        <h4 className="mb-5">My Collections</h4>
         <div className="collection-card ">
         <div className="icon"> <StoreIcon className="store-icon"/>
          </div>
@@ -132,7 +124,7 @@ export const Collection = () => {
         </DialogContent>
       </Dialog>
         </div>
-        <div className="collection-card2">
+        <div className="collection-card ml-5">
         </div>
       </div>
     </div>

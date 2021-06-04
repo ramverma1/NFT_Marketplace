@@ -84,7 +84,7 @@ export const Header = () => {
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <a class="navbar-brand ml-5" href="#" style={{    fontSize: "40px",
-    fontWeight: "500", fontFamily:"cursive",    textShadow: "2px 2px 5px" }}><span>W</span><span style={{color:"red"}}>N</span><span >F</span><span style={{color:"yellow"}}>T</span></a>
+    fontWeight: "500", fontFamily:"cursive",    textShadow: "2px 2px 5px" }}><span>W-</span><span style={{color:"red"}}>N</span><span >F</span><span style={{color:"yellow"}}>T</span></a>
       <input class="form-control mr-sm-2 form-control rounded" type="search" placeholder="Search" aria-label="Search" />
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
