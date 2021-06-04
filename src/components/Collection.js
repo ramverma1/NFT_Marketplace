@@ -26,6 +26,7 @@ export const Collection = () => {
    const [open, setOpen] = React.useState(false);
    const [picture, setPicture] = useState(null);
    const [imgData, setImgData] = useState(null);
+
    const [message, setmessage] = useState(null)
    const [isMessage, setIsMessage] = useState(false)
    const [messageType, setMessageType] = useState("success")
@@ -40,7 +41,8 @@ export const Collection = () => {
       });
       reader.readAsDataURL(e.target.files[0]);
     }
-   }
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -115,9 +117,16 @@ export const Collection = () => {
               </div>
             <div>
               <label className="black" style={{marginTop:'20px'}}>Name*</label>
-              <input type="text" placeholder="Example: Treasures of the Sea" className="input-text"/>
+              <input 
+                type="text" 
+                placeholder="Example: Treasures of the Sea" 
+                className="input-text"
+                onChange={e => setName(e.target.value)}/>
               <label className="black" style={{marginTop:'13px'}}>Description*</label>
-              <textarea   placeholder="Provide a description for your store. Markdown syntax is supported" className="input-text textarea"/>
+              <textarea 
+                placeholder="Provide a description for your store. Markdown syntax is supported" 
+                className="input-text textarea"
+                onChange={e => setDescription(e.target.value)}/>
             </div>  
           </DialogContentText>
             <button type="button" class="btn btn-primary create last" onClick={handleSubmit} > Create </button>
