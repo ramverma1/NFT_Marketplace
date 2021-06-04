@@ -1,3 +1,13 @@
+@media (min-width: 576px) {  }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {  }
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {  }
+/* 
+// Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,7 +24,7 @@ code {
 }
 .token-card{
     width: 25%;
-    height: 30% !important;
+    height: 65% !important;
     padding: 15px 10px 15px 10px;
     cursor: pointer;
     margin: 8px;
@@ -30,10 +40,11 @@ code {
       overflow-y: hidden;
     }
      .Token_root{
-      margin-left: 350px;
+      /* margin-left: 350px; */
       display: flex;
-      margin-top: 90px;
+      /* margin-top: 90px; */
     }
+    
  .left-text{
    float: left !important;
    margin-left: -20px;
@@ -74,37 +85,6 @@ code {
  .TabNavItem--name{
    white-space: nowrap;
  }
- /* .jOKjXn .CategoryBar--tab-item {
-    padding: 0px 20px;
-    flex-shrink: 0;
-    margin: 0px 5px;
-}
-.dbsVw.TabNavItem--active {
-    background-color: rgb(229, 232, 235);
-    font-weight: 500;
-}
-.dbsVw {
-    background-color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 4px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    padding: 8px 16px;
-    margin: 0px 12px;
-    font-weight: 500;
-    transition: all 0.3s ease 0s;
-}
-.eOLEwm {
-    display: inline-flex;
-    -webkit-box-align: center;
-    align-items: center;
-    font-size: 100%;
-    font-family: inherit;
-    border: 0px;
-    padding: 0px;
-    background: inherit;
-} */
 /* Header component Css */
 .main-header{
     background-color: white;
@@ -146,26 +126,43 @@ code {
    background-color: white;
    padding: 0px 37px 2px 18px;
 }
+.profile :hover{
+  display: block;
+}
 
 /* collection component css */
 
 .collection-sidenav
 {
-  height: 700px;
-  background-color: white;
+    overflow-y: hidden !important;
+    background-color: rgb(251, 253, 255);
+    border-right: 1px solid rgb(229, 232, 235);
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 72px;
+    padding: 4px 8px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 .collection-right
 {
-  top: -683px;
-  left: -300px;
+  display: flex;
+  margin-left: 300px !important;
 }
 .collection-card{
     width: 20%;
     height: 320px;
     padding: 17px 10px 15px 0px;
     cursor: pointer;
-    margin: 69px 0px 0px 595px;
     box-shadow: 0px 0px 2px 2px gainsboro;
+    margin-left: -132px;
+    margin-top: 5rem!important;
+}
+.MuiTypography-body1{
+  font-size: 20px !important;
+  font-weight: 500 !important;
 }
 .collection-card2{
      width: 20%;
@@ -173,7 +170,7 @@ code {
     padding: 17px 10px 15px 0px;
     cursor: pointer;
     box-shadow: 0px 0px 2px 2px gainsboro;
-    margin: -320px 0px 0px 936px;
+    margin-top: -320px 
 }
 .span{
     font-size: 15px;
@@ -336,6 +333,8 @@ label{
 }
 .navbar-light .navbar-nav .nav-link {
     color: black;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .featured-background{
@@ -352,15 +351,7 @@ label{
 .imgtop:hover{
   box-shadow: 0px 0px 4px 4px gainsboro;
 }
-/* .Home{
-  background-image: url('./assets/home/da0.jpg') !important;
-  opacity: 0.1;
-  width: 100%;
-  height: 100%;
-} */
-/* h1, h2 {
-    line-height: 110%;
-} */
+
 .home-title{
     width: 45%;
     padding: 110px 20px 44px 19px;
@@ -377,12 +368,11 @@ label{
     font-size: x-large;
     font-weight: 600;
 }
-/* .imgbottom{
-  height: 450px;
-  width: 445px;
-} */
+
 .filter{
   border-right: 1px solid gainsboro !important;
+  height: 700px !important;
+  overflow-y: scroll;
 }
 .mycontainer{
     width: 100%;
@@ -395,3 +385,111 @@ label{
       flex-wrap: nowrap !important;
 
 }
+.heading{
+   -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    padding: 20px 12px;
+    user-select: none;
+}
+ .collection-filter :hover{
+  background-color:gainsboro !important;
+}
+.FeaturedFilter--items {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+.FeaturedFilter {
+ -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(229, 232, 235);
+    border-radius: 5px;
+    color: rgb(53, 56, 64);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    height: 40px;
+    margin: 4px;
+    padding: 10px;
+    width: calc(50% - 8px);
+    cursor: pointer;
+}
+ .FeaturedFilter:hover{
+  
+   box-shadow: 0px 0px 4px 4px gainsboro;
+} 
+.Panel--isContentPadded {
+    padding: 20px;
+    border-radius: 0px 0px 5px 5px;
+}
+.select{
+    cursor: pointer;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid rgb(229, 232, 235);
+    width: 100%;
+    padding: 12px;
+}
+.min-max{
+  -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.check{
+  display: grid !important;
+}
+.second-layer{
+  
+  top: 437px;
+}
+.modal{
+    justify-content: center !important;
+    display: flex;
+    align-items: center !important;
+    
+}
+.MuiBackdrop-root{
+  opacity: 0.3 !important;
+}
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #727070;
+  padding: 16px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+

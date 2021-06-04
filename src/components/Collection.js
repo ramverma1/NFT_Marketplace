@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { makeStyles,Typography } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -6,16 +7,31 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import StoreIcon from '@material-ui/icons/Store';
-import sha256 from 'js-sha256';
+import Alert from '@material-ui/lab/Alert';
+import ListIcon from '@material-ui/icons/List';
+import InfoIcon from '@material-ui/icons/Info';
+
+const useStyles = makeStyles((theme) => ({
+
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 export const Collection = () => {
+  const classes = useStyles();
    const [open, setOpen] = React.useState(false);
    const [picture, setPicture] = useState(null);
    const [imgData, setImgData] = useState(null);
-   const [name, setName] = useState();
-   const [description, setDescription] = useState();
 
-  const onChangePicture = e => {
+   const [message, setmessage] = useState(null)
+   const [isMessage, setIsMessage] = useState(false)
+   const [messageType, setMessageType] = useState("success")
+ 
+   const onChangePicture = e => {
     if (e.target.files[0]) {
       console.log("picture: ", e.target.files);
       setPicture(e.target.files[0]);
@@ -31,35 +47,59 @@ export const Collection = () => {
     setOpen(true);
   };
   
-  const handleClose = () => {
+  const handleClickClose = () => {
     setOpen(false);
   };
 
-  const createToken = () => {
-    const hash = sha256(imgData)
-    
-  }
-
+   const handleSubmit=()=>{
+       if(false)
+      {
+         setIsMessage(true)
+          setMessageType("success")
+          setmessage(" Token Created Successfully")
+          setTimeout(() => {
+          setIsMessage(false) ;
+        }, 1500);
+      }
+      else{
+         {
+         setIsMessage(true)
+         setMessageType("warning")
+          setmessage(" This Token Already Exists ")
+          setTimeout(() => {
+          setIsMessage(false) ;
+        }, 1500);
+      }
+        
+      }
+      
+   }
   
   return (
-    <row>
-  
-      <div className="col-lg-2 collection-sidenav">
-        
+    <div className="row">
+    <div className="col-lg-2 collection-sidenav filter ">
+    <div className="collection-filter ml-3">
+        <Typography className="heading"> <ListIcon className="mr-3"/>  My Payouts</Typography>
+        <Typography className="heading"> <StoreIcon className="mr-3"/>  My Collections</Typography>
+        <Typography className="heading"> <InfoIcon className="mr-3"/>  Community & Help</Typography>
+       </div> 
       </div>
-      <div className="col-lg-10 collection-right">
-        <h4>My Collections</h4>
-        <div className="collection-card">
+      <div className="col-lg-10 collection-right mt-5">
+        <h4 className="mb-5">My Collections</h4>
+        <div className="collection-card ">
         <div className="icon"> <StoreIcon className="store-icon"/>
          </div>
         <span className="span"> Create new collection </span>
         <button type="button" class="btn btn-primary create" onClick={handleClickOpen}>Create </button>
          <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleClickClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
+         {isMessage &&
+          <Alert severity={messageType} style={{ position:'absolute' , marginLeft:'115px'}}>{message}</Alert>
+        }
         <DialogTitle id="alert-dialog-title">{"Create Your Collection"}</DialogTitle>
         <DialogContentText id="alert-dialog-description">
           You can change these values later, along with configuring external URls,<br></br>
@@ -89,13 +129,13 @@ export const Collection = () => {
                 onChange={e => setDescription(e.target.value)}/>
             </div>  
           </DialogContentText>
-            <button type="button" class="btn btn-primary create last" onClick={createToken} > Create </button>
+            <button type="button" class="btn btn-primary create last" onClick={handleSubmit} > Create </button>
         </DialogContent>
       </Dialog>
         </div>
-        <div className="collection-card2">
+        <div className="collection-card ml-5">
         </div>
       </div>
-    </row>
+    </div>
   )
 }
