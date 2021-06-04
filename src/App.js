@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { TokenPage } from './components/TokenPage';
 import { Switch, Route ,BrowserRouter} from 'react-router-dom';
 import { Collection } from './components/Collection';
+import { Home } from './components/Home';
 import Marketplace from './abis/Wnft.json';
 import Web3 from 'web3';
 
@@ -42,15 +43,17 @@ function App() {
       const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
       setMarketplace(marketplace)
     } else {
-      window.alert('Marketplace contract not deployed to detected network.')
+      // window.alert('Marketplace contract not deployed to detected network.')
     }
   }
 
   return (
     <div className="App">
     <Header/>
+    
       <BrowserRouter>
       <Switch>
+      <Route path="/" component={Home } exact={true}  />
        <Route path="/asset" component={TokenPage}  />
        <Route path="/collection" component={Collection}  />
        </Switch>
