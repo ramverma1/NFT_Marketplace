@@ -83,14 +83,13 @@ export const Collection = () => {
   const handleClickClose = () => {
     setOpen(false);
   };
-   console.log(account);
-  console.log(assets);
+ 
   const Assets = (
     assets.map(item => {
       console.log("item........ ", item)
       
      return (
-        <div className="card token-card2 mr-4">
+        <div className="card token-card2 mr-4 mt-5 mb-5">
           <img src={`http://localhost:8000/${item.image}`} className="mt-3 token-image"/>
           <row>
             <div className="col-lg-12 card-body">
@@ -100,7 +99,7 @@ export const Collection = () => {
               </div>
               <div className="col-lg-4 right-text ">
                 <span style={{color:"rgb(138, 147, 155)",whiteSpace :"nowrap"}}>price</span>
-                <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
+                <span style={{whiteSpace :"nowrap"}} > <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="15%"></img> 0.036</span>
               </div>
             </div>
           </row>
@@ -156,16 +155,16 @@ export const Collection = () => {
   
   return (
     <div className="row">
-    <div className="col-lg-2 collection-sidenav filter ">
+    <div className="col-lg-3 collection-sidenav filter ">
       <div className="collection-filter ml-3">
         <Typography className="heading"> <ListIcon className="mr-3"/>  My Payouts</Typography>
         <Typography className="heading"> <StoreIcon className="mr-3"/>  My Collections</Typography>
         <Typography className="heading"> <InfoIcon className="mr-3"/>  Community & Help</Typography>
        </div> 
       </div>
-      <div className="col-lg-10 collection-right mt-5">
-        <h4 className="mb-5">My Collections</h4>
-        <div className="collection-card ">
+      <div className="col-md-9 collection-right mt-5 Token_root ">
+       <h4 className="mb-5">My Collections</h4>
+        <div className="collection-card mt-5 mr-4">
         <div className="icon"> <StoreIcon className="store-icon"/>
          </div>
         <span className="span"> Create new collection </span>
@@ -212,8 +211,7 @@ export const Collection = () => {
           </DialogContent>
       </Dialog>
       </div>
-      <div className="col-md-9 mt-5 Token_root ">{Assets}</div>
+      {Assets}</div>
         </div> 
-      </div>
   )
 }

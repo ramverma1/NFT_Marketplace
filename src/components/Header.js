@@ -93,10 +93,18 @@ export const Header = () => {
       <div class="dropdown">
       <li class="nav-item"><a class="nav-link" href="#"><AccountCircleIcon/> </a> 
         <div class="dropdown-content">
-          <a href="#">My Profile</a>
+        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Comming Soon">
+         <a href="#">My Profile</a>
+        </span>
+          
           <a  href="#" onClick={handleCollection}>My Collection </a> 
+          <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Comming Soon">
           <a  href="#">My Favourites </a>
-          <a  href="#">My Account Settings </a>
+        </span>
+          
+          <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Comming Soon">
+           <a  href="#">My Account Settings </a>
+        </span>
           <a  href="#">Log out </a>   
         </div> 
       </li>
