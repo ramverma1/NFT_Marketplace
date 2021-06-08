@@ -23,9 +23,15 @@ code {
     monospace;
 }
 .token-image{
-    width: 90%;
-    height: 70%;
+    width: 250px;
+    height: 250px;
     border-radius: 6px;
+}
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0.25rem !important;
 }
 .buy-now
 {
@@ -46,8 +52,8 @@ code {
    color: black;
 } 
 .token-card{
-    width: 25%;
-    height: 25% !important;
+    width: 320px;
+    height: 400px !important;
     padding: 15px 0px 15px 22px;
     cursor: pointer;
     margin: 8px;
@@ -57,11 +63,12 @@ code {
    box-shadow: 0px 0px 4px 4px gainsboro;
 } 
 .token-card2{
-    width: 25%;
-    height: 41% !important;
+    width: 320px;
+    height: 400px !important;
     padding: 15px 0px 15px 22px;
     cursor: pointer;
     margin: 8px;
+    top: 30px;
     }
     .Header_root{
       margin-left: 350px;
@@ -120,6 +127,7 @@ code {
     background-color: white;
     height: 25%;
     box-shadow: 0px 0px 20px 0px gainsboro;
+    
 }
 .title{
     font-size: 23px;
@@ -178,16 +186,16 @@ code {
 }
 .collection-right
 {
-  display: flex;
-  margin-left: 300px !important;
+  /* display: flex; */
+  margin-left: 400px !important;
 }
 .collection-card{
-    width: 20%;
-    height: 320px;
+    width: 320px;
+    height: 400px;
     padding: 17px 10px 15px 0px;
     cursor: pointer;
     box-shadow: 0px 0px 2px 2px gainsboro;
-    margin-left: -132px;
+    margin-left: -162px;
     margin-top: 5rem!important;
 }
 .MuiTypography-body1{
@@ -204,6 +212,7 @@ code {
 .span{
     font-size: 15px;
     font-weight: 600;
+    margin-left: 27px;
 }
 .icon
 {
@@ -212,7 +221,7 @@ code {
 .create{
     width: 133px;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 35px;
     text-align: center !important;
 }
 .MuiDialog-paperWidthSm {
@@ -364,6 +373,7 @@ label{
     color: black;
     font-weight: 600;
     font-size: 18px;
+      
 }
 
 .featured-background{
