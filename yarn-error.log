@@ -1,30 +1,20 @@
 Arguments: 
-  /home/webkorps-system35/.nvm/versions/node/v15.0.0/bin/node /usr/local/bin/yarn add @material-ui/lab/Alert
+  C:\Program Files\nodejs\node.exe C:\Users\dell\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add axios
 
 PATH: 
-  /home/webkorps-system35/.nvm/versions/node/v15.0.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\ArcSoft\Bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\dell\AppData\Local\Microsoft\WindowsApps;C:\Users\dell\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\dell\AppData\Roaming\npm;
 
 Yarn version: 
   1.22.10
 
 Node version: 
-  15.0.0
+  14.15.1
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@material-ui%2flab/Alert: Request "https://registry.yarnpkg.com/@material-ui%2flab/Alert" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66997:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
-      at Request.emit (node:events:327:20)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
-      at Request.emit (node:events:327:20)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
-      at Object.onceWrapper (node:events:433:28)
-      at IncomingMessage.emit (node:events:339:22)
-      at endReadableNT (node:internal/streams/readable:1289:12)
-      at processTicksAndRejections (node:internal/process/task_queues:80:21)
+  Error: EPERM: operation not permitted, unlink 'C:\Users\dell\OneDrive\Desktop\new\NFT_Marketplace\node_modules\bufferutil\prebuilds\win32-x64\node.napi.node'
 
 npm manifest: 
   {
@@ -39,6 +29,7 @@ npm manifest:
       "@testing-library/jest-dom": "^5.11.4",
       "@testing-library/react": "^11.1.0",
       "@testing-library/user-event": "^12.1.10",
+      "axios": "^0.21.1",
       "babel-polyfill": "^6.26.0",
       "babel-register": "^6.26.0",
       "bootstrap": "4.6.0",
@@ -1740,7 +1731,7 @@ Lockfile:
       "@types/yargs" "^15.0.0"
       "chalk" "^4.0.0"
   
-  "@material-ui/core@^4.0.0", "@material-ui/core@^4.11.4":
+  "@material-ui/core@^4.0.0", "@material-ui/core@^4.11.4", "@material-ui/core@^4.9.10":
     "integrity" "sha512-oqb+lJ2Dl9HXI9orc6/aN8ZIAMkeThufA5iZELf2LQeBn2NtjVilF5D2w7e9RpntAzDb4jK5DsVhkfOvFY/8fg=="
     "resolved" "https://registry.npmjs.org/@material-ui/core/-/core-4.11.4.tgz"
     "version" "4.11.4"
@@ -1766,15 +1757,15 @@ Lockfile:
       "@babel/runtime" "^7.4.4"
   
   "@material-ui/lab@^4.0.0-alpha.58":
-    version "4.0.0-alpha.58"
-    resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.58.tgz#c7ebb66f49863c5acbb20817163737caa299fafc"
-    integrity sha512-GKHlJqLxUeHH3L3dGQ48ZavYrqGOTXkFkiEiuYMAnAvXAZP4rhMIqeHOPXSUQan4Bd8QnafDcpovOSLnadDmKw==
+    "integrity" "sha512-GKHlJqLxUeHH3L3dGQ48ZavYrqGOTXkFkiEiuYMAnAvXAZP4rhMIqeHOPXSUQan4Bd8QnafDcpovOSLnadDmKw=="
+    "resolved" "https://registry.npmjs.org/@material-ui/lab/-/lab-4.0.0-alpha.58.tgz"
+    "version" "4.0.0-alpha.58"
     dependencies:
       "@babel/runtime" "^7.4.4"
       "@material-ui/utils" "^4.11.2"
-      clsx "^1.0.4"
-      prop-types "^15.7.2"
-      react-is "^16.8.0 || ^17.0.0"
+      "clsx" "^1.0.4"
+      "prop-types" "^15.7.2"
+      "react-is" "^16.8.0 || ^17.0.0"
   
   "@material-ui/styles@^4.11.4":
     "integrity" "sha512-KNTIZcnj/zprG5LW0Sao7zw+yG3O35pviHzejMdcSGCdWbiO8qzRgOYL8JAxAsWBKOKYwVZxXtHWaB5T2Kvxew=="
@@ -3070,6 +3061,13 @@ Lockfile:
     "integrity" "sha512-V+Nq70NxKhYt89ArVcaNL9FDryB3vQOd+BFXZIfO3RP6rwtj+2yqqqdHEkacutglPaZLkJeuXKCjCJDMGPtPqg=="
     "resolved" "https://registry.npmjs.org/axe-core/-/axe-core-4.1.2.tgz"
     "version" "4.1.2"
+  
+  "axios@^0.21.1":
+    "integrity" "sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA=="
+    "resolved" "https://registry.npmjs.org/axios/-/axios-0.21.1.tgz"
+    "version" "0.21.1"
+    dependencies:
+      "follow-redirects" "^1.10.0"
   
   "axobject-query@^2.2.0":
     "integrity" "sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA=="
@@ -6159,7 +6157,7 @@ Lockfile:
       "inherits" "^2.0.3"
       "readable-stream" "^2.3.6"
   
-  "follow-redirects@^1.0.0":
+  "follow-redirects@^1.0.0", "follow-redirects@^1.10.0":
     "integrity" "sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA=="
     "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.2.tgz"
     "version" "1.13.2"
@@ -10849,15 +10847,10 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
     "version" "6.0.9"
   
-  "react-is@^16.3.2", "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.1":
+  "react-is@^16.3.2", "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.0 || ^17.0.0", "react-is@^16.8.1":
     "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
     "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
     "version" "16.13.1"
-  
-  "react-is@^16.8.0 || ^17.0.0":
-    "integrity" "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
-    "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
-    "version" "17.0.2"
   
   "react-is@^17.0.1":
     "integrity" "sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA=="

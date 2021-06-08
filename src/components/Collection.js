@@ -1,13 +1,10 @@
 import React,{useEffect, useState} from 'react';
 import { makeStyles,Typography } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StoreIcon from '@material-ui/icons/Store';
 import Alert from '@material-ui/lab/Alert';
 import ListIcon from '@material-ui/icons/List';
@@ -44,7 +41,7 @@ export const Collection = () => {
   useEffect(() => {
     loadBlockchainData()
     getAssets()
-  },[])
+  },)
 
   const loadBlockchainData = async () => {
     const web3 = new Web3(window.web3.currentProvider);
@@ -63,11 +60,13 @@ export const Collection = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   }
-
   const getAssets = async () => {
     try {
-      let response = await axios.post(`${SERVER_API_LINK}get-my-token`,{address:account})
+      let response = await axios.post(`${SERVER_API_LINK}get-my-token`,{
+        address:account
+      })
       setAssests(response.data)
+      console.log(response.data)
     } catch (e) {
         console.log(e.Error)
     }
@@ -84,31 +83,27 @@ export const Collection = () => {
   const handleClickClose = () => {
     setOpen(false);
   };
-
+   console.log(account);
+  console.log(assets);
   const Assets = (
     assets.map(item => {
-      return (
-        <div className="collection-card ml-5">
-          <div className="card token-card mr-2">
-            <header>
-              <IconButton className="icon-button">
-              <FavoriteBorderIcon />
-              </IconButton>
-            </header>
-            <img src={`http://localhost:8000/${item.image}`} width="auto"/>
-            <row>
-              <div className="col-lg-12 card-body">
-                <div className="left-text col-lg-8">
-                  <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-                  <span > BASTARD GAN PUNKS V2... </span>
-                </div>
-                <div className="col-lg-4 right-text ">
-                  <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-                  <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
-                </div>
+      console.log("item........ ", item)
+      
+     return (
+        <div className="card token-card2 mr-4">
+          <img src={`http://localhost:8000/${item.image}`} className="mt-3 token-image"/>
+          <row>
+            <div className="col-lg-12 card-body">
+              <div className="left-text col-lg-8">
+                <span style={{color:"rgb(138, 147, 155)"}}>{item.token_name}</span><br></br>
+                <span > {item.description} </span>
               </div>
-            </row>
-          </div>
+              <div className="col-lg-4 right-text ">
+                <span style={{color:"rgb(138, 147, 155)",whiteSpace :"nowrap"}}>price</span>
+                <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
+              </div>
+            </div>
+          </row>
         </div>
       )
     })
@@ -141,7 +136,7 @@ export const Collection = () => {
         console.log(e.Error)
     }
 
-    console.log(response.data)
+    console.log('res',response.data)
     if(response.data.success !== false) {
       setIsMessage(true)
       setMessageType("success")

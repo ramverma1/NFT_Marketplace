@@ -1,17 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Image1 from '../assets/token/crypoterior.png';
-import Image2 from '../assets/token/crypto.gif';
-import Art from '../assets/token/art-light.svg';
-import Music from '../assets/token/music-light.svg';
-import Domain from '../assets/token/domain-names-light.svg';
-import Virtual from '../assets/token/virtual-worlds-light.svg';
-import Trading from '../assets/token/trading-cards-light.svg';
-import Utility from '../assets/token/utility-light.svg';
-import Sports from '../assets/token/sports-light.svg';
-import Collectibles from '../assets/token/collectibles-light.svg';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -26,16 +13,9 @@ import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
-
-const useStyles = makeStyles({
-  root: {
-    width: '20%',
-  },
-});
 
 const SERVER_API_LINK = "http://localhost:8000/api/"
 
@@ -60,28 +40,24 @@ export const TokenPage = () => {
 
   const Assets = (
     assets.map(item => {
-      console.log(item._id)
       return (
-        <div className="card token-card mr-2">
-          <header>
-            <IconButton className="icon-button">
-            <FavoriteBorderIcon />
-            </IconButton>
-          </header>
-          <img src={`http://localhost:8000/${item.image}`} width="auto"/>
+        <div className="card token-card mr-4">
+          <img src={`http://localhost:8000/${item.image}`} className="mt-3 token-image"/>
           <row>
             <div className="col-lg-12 card-body">
               <div className="left-text col-lg-8">
-                <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-                <span > BASTARD GAN PUNKS V2... </span>
+                <span style={{color:"rgb(138, 147, 155)"}}>{item.token_name}</span><br></br>
+                <span > {item.description} </span>
               </div>
               <div className="col-lg-4 right-text ">
                 <span style={{color:"rgb(138, 147, 155)"}}>price</span>
                 <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
               </div>
+              <button className="buy-now mt-3">Buy Now</button>
             </div>
           </row>
-        </div>)
+        </div>
+      )
     })
   )
 
@@ -200,7 +176,9 @@ export const TokenPage = () => {
         </Accordion>
         </div>
       </div>
-    <div className="col-md-9 mt-5 Token_root ">{Assets}</div>
+    <div className="col-lg-9 mt-5 Token_root ">
+    {Assets}
+    </div>
   </div>
   )
 }
