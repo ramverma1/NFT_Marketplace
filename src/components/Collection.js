@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { makeStyles,Typography } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,10 +6,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StoreIcon from '@material-ui/icons/Store';
 import Alert from '@material-ui/lab/Alert';
 import ListIcon from '@material-ui/icons/List';
 import InfoIcon from '@material-ui/icons/Info';
+import sha256 from 'js-sha256';
+import axios from 'axios';
+import Web3 from 'web3';
+
+const SERVER_API_LINK = "http://localhost:8000/api/"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -23,17 +30,31 @@ const useStyles = makeStyles((theme) => ({
 
 export const Collection = () => {
   const classes = useStyles();
-   const [open, setOpen] = React.useState(false);
-   const [picture, setPicture] = useState(null);
-   const [imgData, setImgData] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [picture, setPicture] = useState(null);
+  const [name, setName] = useState()
+  const [imgData, setImgData] = useState()
+  const [description, setDescription] = useState()
+  const [ account, setAccount ] = useState();
+  const [message, setmessage] = useState(null)
+  const [isMessage, setIsMessage] = useState(false)
+  const [messageType, setMessageType] = useState("success")
+  const [assets, setAssests] = useState([])
 
-   const [message, setmessage] = useState(null)
-   const [isMessage, setIsMessage] = useState(false)
-   const [messageType, setMessageType] = useState("success")
- 
-   const onChangePicture = e => {
+  useEffect(() => {
+    loadBlockchainData()
+    getAssets()
+  },[])
+
+  const loadBlockchainData = async () => {
+    const web3 = new Web3(window.web3.currentProvider);
+    // Load account
+    const accounts = await web3.eth.getAccounts()
+    setAccount(accounts[0])
+  }
+
+  const onChangePicture = e => {
     if (e.target.files[0]) {
-      console.log("picture: ", e.target.files);
       setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
@@ -43,42 +64,105 @@ export const Collection = () => {
     }
   }
 
+  const getAssets = async () => {
+    try {
+      let response = await axios.post(`${SERVER_API_LINK}get-my-token`,{address:account})
+      setAssests(response.data)
+    } catch (e) {
+        console.log(e.Error)
+    }
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const createHash = () => {
+    return sha256(imgData) 
+  }
   
   const handleClickClose = () => {
     setOpen(false);
   };
 
-   const handleSubmit=()=>{
-       if(false)
-      {
-         setIsMessage(true)
-          setMessageType("success")
-          setmessage(" Token Created Successfully")
-          setTimeout(() => {
-          setIsMessage(false) ;
-        }, 1500);
-      }
-      else{
-         {
-         setIsMessage(true)
-         setMessageType("warning")
-          setmessage(" This Token Already Exists ")
-          setTimeout(() => {
-          setIsMessage(false) ;
-        }, 1500);
-      }
-        
-      }
-      
-   }
+  const Assets = (
+    assets.map(item => {
+      return (
+        <div className="collection-card ml-5">
+          <div className="card token-card mr-2">
+            <header>
+              <IconButton className="icon-button">
+              <FavoriteBorderIcon />
+              </IconButton>
+            </header>
+            <img src={`http://localhost:8000/${item.image}`} width="auto"/>
+            <row>
+              <div className="col-lg-12 card-body">
+                <div className="left-text col-lg-8">
+                  <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
+                  <span > BASTARD GAN PUNKS V2... </span>
+                </div>
+                <div className="col-lg-4 right-text ">
+                  <span style={{color:"rgb(138, 147, 155)"}}>price</span>
+                  <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
+                </div>
+              </div>
+            </row>
+          </div>
+        </div>
+      )
+    })
+  )
+
+
+  // async function createNFT(image) {
+  //   try {
+  //     let response = await axios.post(`${SERVER_API_LINK}create`, image)
+  //     console.log(response.data)
+  //     return { response }
+  //   } catch (e) {
+  //       console.log(e.Error)
+  //   }
+  // }
+
+  const handleSubmit = async () => {
+    const hash = createHash()
+    const image = new FormData()
+    image.append("hash", hash)
+    image.append("name", name)
+    image.append("image", picture)
+    image.append("description", description)
+    image.append("address", account)
+
+    let response;
+    try {
+      response = await axios.post(`${SERVER_API_LINK}create`, image)
+    } catch (e) {
+        console.log(e.Error)
+    }
+
+    console.log(response.data)
+    if(response.data.success !== false) {
+      setIsMessage(true)
+      setMessageType("success")
+      setmessage(" Token Created Successfully")
+      setTimeout(() => {
+        setIsMessage(false) ;
+      }, 1500);
+    } else {  
+      setIsMessage(true)
+      setMessageType("warning")
+      setmessage(" This Token Already Exists ")
+      setTimeout(() => {
+        setIsMessage(false) ;
+      }, 1500);
+    }  
+  }
   
   return (
     <div className="row">
     <div className="col-lg-2 collection-sidenav filter ">
-    <div className="collection-filter ml-3">
+      <div className="collection-filter ml-3">
         <Typography className="heading"> <ListIcon className="mr-3"/>  My Payouts</Typography>
         <Typography className="heading"> <StoreIcon className="mr-3"/>  My Collections</Typography>
         <Typography className="heading"> <InfoIcon className="mr-3"/>  Community & Help</Typography>
@@ -91,12 +175,12 @@ export const Collection = () => {
          </div>
         <span className="span"> Create new collection </span>
         <button type="button" class="btn btn-primary create" onClick={handleClickOpen}>Create </button>
-         <Dialog
+        <Dialog
         open={open}
         onClose={handleClickClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-      >
+        >
          {isMessage &&
           <Alert severity={messageType} style={{ position:'absolute' , marginLeft:'115px'}}>{message}</Alert>
         }
@@ -111,10 +195,10 @@ export const Collection = () => {
            <br></br>
            <label id="logo" >(350 x 350 recommended) </label>
            <div clas="file_input_wrap">
-              <input type="file" name="imageUpload" id="imageUpload" hidden accept="image/*" onChange={onChangePicture}  />
+              <input type="file" width="50px" height="50px" name="file" id="imageUpload" hidden accept="image/*" onChange={(e)=>onChangePicture(e)}/>
               <label for="imageUpload" className="img-icon"><ImageOutlinedIcon className="svg"/></label>
-                <img width="100%"  src={imgData} />
-              </div>
+              <img width="70%" height="70%" src={imgData} />
+            </div>
             <div>
               <label className="black" style={{marginTop:'20px'}}>Name*</label>
               <input 
@@ -130,12 +214,11 @@ export const Collection = () => {
             </div>  
           </DialogContentText>
             <button type="button" class="btn btn-primary create last" onClick={handleSubmit} > Create </button>
-        </DialogContent>
+          </DialogContent>
       </Dialog>
-        </div>
-        <div className="collection-card ml-5">
-        </div>
       </div>
-    </div>
+      <div className="col-md-9 mt-5 Token_root ">{Assets}</div>
+        </div> 
+      </div>
   )
 }

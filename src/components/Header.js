@@ -26,7 +26,7 @@ export const Header = () => {
 
   useEffect(()=>{
     loadBlockchainData()
-  })
+  },[])
 
   const loadBlockchainData = async () => {
     const web3 = new Web3(window.web3.currentProvider);
@@ -83,8 +83,7 @@ export const Header = () => {
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand ml-5" href="#" style={{    fontSize: "40px",
-
+    <a class="navbar-brand ml-5" href="/" style={{    fontSize: "40px",
     fontWeight: "500", fontFamily:"cursive",    textShadow: "2px 2px 5px" }}><span>W-</span><span style={{color:"red"}}>N</span><span >F</span><span style={{color:"yellow"}}>T</span></a>
       <input class="form-control mr-sm-2 form-control rounded" type="search" placeholder="Search" aria-label="Search" />
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -114,7 +113,7 @@ export const Header = () => {
          <div className="wallet">
          <span className="total"> Total balance </span> 
          <br/>
-         <span className="balance" style={{whiteSpace :"nowrap"}}>  $0.000<img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="2%"></img> {balance} ETH</span> 
+         <span className="balance" style={{whiteSpace :"nowrap"}}><img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="2%"></img> {balance} ETH</span> 
 
          </div>
          <button className="btn-btn-primary add-funds"> Add Funds </button> 
