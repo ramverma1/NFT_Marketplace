@@ -41,7 +41,7 @@ export const Home = () => {
       <div className="row">
       <div className="col-lg-12">
         <div className="col-lg-6 home-title" style={{float:"left" , marginLeft:"-120px"}}>
-        <h1 style={{ fontSize: "45px" ,    fontFamily: "sans-serif"}}>Discover, collect and sell extraordinary NFTs</h1>
+        <h1 style={{ fontSize: "50px" , fontFamily: "sans-serif"}}>Discover, Collect and sell extraordinary NFTs</h1>
         <span style={{fontSize: "30px", fontWeight:"300"}}>on the world's first & largest NFT marketplace</span>
         <div className="explore-btn">
         <button className="btn btn-primary explore mt-5 mr-3" onClick={handleClick} > Explore </button>

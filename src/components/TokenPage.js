@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image1 from '../assets/token/crypoterior.png';
 import Image2 from '../assets/token/crypto.gif';
 import Art from '../assets/token/art-light.svg';
@@ -29,6 +29,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -36,210 +37,170 @@ const useStyles = makeStyles({
   },
 });
 
+const SERVER_API_LINK = "http://localhost:8000/api/"
+
+// const getAssets = async () => fetch(`${SERVER_API_LINK}get-all`).then(res => res.json())
+
 export const TokenPage = () => {
+
+  const [assets, setAssests] = useState([])
+
+  useEffect(()=>{
+    getAssets();
+  },[])
+
+  const getAssets = async () => {
+    try {
+      let response = await axios.get(`${SERVER_API_LINK}get-all`)
+      setAssests(response.data)
+    } catch (e) {
+        console.log(e.Error)
+    }
+  }
+
+  const Assets = (
+    assets.map(item => {
+      console.log(item._id)
+      return (
+        <div className="card token-card mr-2">
+          <header>
+            <IconButton className="icon-button">
+            <FavoriteBorderIcon />
+            </IconButton>
+          </header>
+          <img src={`http://localhost:8000/${item.image}`} width="auto"/>
+          <row>
+            <div className="col-lg-12 card-body">
+              <div className="left-text col-lg-8">
+                <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
+                <span > BASTARD GAN PUNKS V2... </span>
+              </div>
+              <div className="col-lg-4 right-text ">
+                <span style={{color:"rgb(138, 147, 155)"}}>price</span>
+                <span style={{whiteSpace :"nowrap"}} > <img src={`http://localhost:8000/${item.image}`} width="26%"></img> 0.036</span>
+              </div>
+            </div>
+          </row>
+        </div>)
+    })
+  )
+
   return (
     <div className="row">
     <div className="col-lg-3">
-    <div className="filter">
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className="heading"> <StarIcon className="mr-2"/>  Status</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="FeaturedFilter--items">
-         <button className="FeaturedFilter">Buy Now</button>
-         <button className="FeaturedFilter">On Auction</button>
-         <button className="FeaturedFilter">New </button>
-         <button className="FeaturedFilter">Has Offers</button>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className="heading"><AttachMoneyIcon className="mr-2"/> Price</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="Panel--isContentPadded">
-           <FormControl className="select">
-        <InputLabel id="demo-simple-select-label">$</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={10}
-        >
-          <MenuItem value={10}>United States Dollar(USD)</MenuItem>
-          <MenuItem value={20}>Ether(ETH)</MenuItem>
-        </Select>
-      </FormControl> 
-        </AccordionDetails>
-      </Accordion>
-          <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className="heading"><AppsIcon className="mr-2"/> Collection</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-          <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className="heading"><InsertLinkIcon className="mr-2"/> Chains</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="check">
-          <FormControlLabel
-            control={
-            <Checkbox
-              checked={false}
-              name="checkedB"
-              color="primary"
-                />
-              }
-              label="Ethereum"
-           />
-           <FormControlLabel
-            control={
-            <Checkbox
-              checked={false}
-              name="checkedB"
-              color="primary"
-                />
-              }
-              label="Matic"
-           />
-           <FormControlLabel
-            control={
-            <Checkbox
-              checked={false}
-              name="checkedB"
-              color="primary"
-                />
-              }
-              label="Klaytn"
-           />
-      
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography className="heading"><LocalOfferIcon className="mr-2"/> On Sale In</Typography>
-        </AccordionSummary>
-         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+      <div className="filter">
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className="heading"> <StarIcon className="mr-2"/>  Status</Typography>
+          </AccordionSummary>
+          <AccordionDetails className="FeaturedFilter--items">
+          <button className="FeaturedFilter">Buy Now</button>
+          <button className="FeaturedFilter">On Auction</button>
+          <button className="FeaturedFilter">New </button>
+          <button className="FeaturedFilter">Has Offers</button>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className="heading"><AttachMoneyIcon className="mr-2"/> Price</Typography>
+          </AccordionSummary>
+          <AccordionDetails className="Panel--isContentPadded">
+            <FormControl className="select">
+          <InputLabel id="demo-simple-select-label">$</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={10}
+          >
+            <MenuItem value={10}>United States Dollar(USD)</MenuItem>
+            <MenuItem value={20}>Ether(ETH)</MenuItem>
+          </Select>
+        </FormControl> 
+          </AccordionDetails>
+        </Accordion>
+            <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className="heading"><AppsIcon className="mr-2"/> Collection</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+              sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+            <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className="heading"><InsertLinkIcon className="mr-2"/> Chains</Typography>
+          </AccordionSummary>
+          <AccordionDetails className="check">
+            <FormControlLabel
+              control={
+              <Checkbox
+                checked={false}
+                name="checkedB"
+                color="primary"
+                  />
+                }
+                label="Ethereum"
+            />
+            <FormControlLabel
+              control={
+              <Checkbox
+                checked={false}
+                name="checkedB"
+                color="primary"
+                  />
+                }
+                label="Matic"
+            />
+            <FormControlLabel
+              control={
+              <Checkbox
+                checked={false}
+                name="checkedB"
+                color="primary"
+                  />
+                }
+                label="Klaytn"
+            />
+        
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
+          >
+            <Typography className="heading"><LocalOfferIcon className="mr-2"/> On Sale In</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+              sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        </div>
       </div>
-    </div>
-
-    <div className="col-md-9 mt-5 Token_root ">
-        <div className="card token-card mr-2">
-        <header>
-           <IconButton className="icon-button">
-           <FavoriteBorderIcon />
-           </IconButton>
-        </header>
-          <img src={Image1} width="auto"/>
-          <row>
-          <div className="col-lg-12 card-body">
-          <div className="left-text col-lg-8">
-            <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-            <span > BASTARD GAN PUNKS V2... </span>
-          </div>
-          <div className="col-lg-4 right-text ">
-            <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-            <span style={{whiteSpace :"nowrap"}} > <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="26%"></img> 0.036</span>
-          </div>
-           </div>
-          </row>
-      </div>
-       <div className="card token-card mr-2">
-        <header>
-           <IconButton className="icon-button">
-           <FavoriteBorderIcon />
-           </IconButton>
-        </header>
-          <img src="https://lh3.googleusercontent.com/i38dNKQsaL3sUbl3jT5HCwNze9hEb0dvMgISNUIWAd1L5YRkZ-j84N9dTZW0AXkGy6Rh0X-a_LH-HWnt0yjbr2rIJ5lAF75HRZ_TKqI=s262" width="auto"/>
-          <row>
-          <div className="col-lg-12 card-body">
-          <div className="left-text col-lg-8">
-            <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-            <span > BASTARD GAN PUNKS V2... </span>
-          </div>
-          <div className="col-lg-4 right-text ">
-            <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-            <span style={{whiteSpace :"nowrap"}}> <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="26%"></img> 0.036</span>
-          </div>
-           </div>
-          </row>
-      </div>
-       <div className=" card token-card">
-        <header>
-           <IconButton className="icon-button">
-           <FavoriteBorderIcon />
-           </IconButton>
-        </header>
-          <img src={Image2} width="auto"/>
-          <row>
-          <div className="col-lg-12 card-body">
-          <div className="left-text col-lg-8">
-            <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-            <span > BASTARD GAN PUNKS V2... </span>
-          </div>
-          <div className="col-lg-4 right-text ">
-            <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-            <span style={{whiteSpace :"nowrap"}} > <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="26%"></img> 0.036</span>
-          </div>
-           </div>
-          </row>
-      </div>
-       <div className="card token-card mr-5">
-        <header>
-           <IconButton className="icon-button">
-           <FavoriteBorderIcon />
-           </IconButton>
-        </header>
-          <img src={Image1} width="auto"/>
-          <row>
-          <div className="col-lg-12 card-body">
-          <div className="left-text col-lg-8">
-            <span style={{color:"rgb(138, 147, 155)"}}>BASTARD GAN PUNKS</span><br></br>
-            <span > BASTARD GAN PUNKS V2... </span>
-          </div>
-          <div className="col-lg-4 right-text ">
-            <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-            <span style={{whiteSpace :"nowrap"}}> <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="26%"></img> 0.036</span>
-          </div>
-           </div>
-          </row>
-      </div>
-      
-    </div>
-    
-    </div>
-   
-  
-  
+    <div className="col-md-9 mt-5 Token_root ">{Assets}</div>
+  </div>
   )
 }
