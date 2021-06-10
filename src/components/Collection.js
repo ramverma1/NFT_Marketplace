@@ -12,6 +12,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import sha256 from 'js-sha256';
 import axios from 'axios';
 import Web3 from 'web3';
+import Marketplace from '../abis/Wnft.json';
 
 const SERVER_API_LINK = "http://localhost:8000/api/"
 
@@ -32,22 +33,31 @@ export const Collection = () => {
   const [name, setName] = useState()
   const [imgData, setImgData] = useState()
   const [description, setDescription] = useState()
-  const [ account, setAccount ] = useState();
+  const [account, setAccount ] = useState();
   const [message, setmessage] = useState(null)
   const [isMessage, setIsMessage] = useState(false)
   const [messageType, setMessageType] = useState("success")
   const [assets, setAssests] = useState([])
-
+  const [marketplace, setMarketplace ] = useState();
+  const [price, setPrice] = useState()
   useEffect(() => {
     loadBlockchainData()
     getAssets()
-  },)
+  }, [])
 
   const loadBlockchainData = async () => {
     const web3 = new Web3(window.web3.currentProvider);
     // Load account
     const accounts = await web3.eth.getAccounts()
     setAccount(accounts[0])
+    const networkId = await web3.eth.net.getId()
+    const networkData = Marketplace.networks[networkId]
+    if(networkData) {
+      const market_place = new web3.eth.Contract(Marketplace.abi, networkData.address)
+      setMarketplace(market_place)
+    } else {
+      window.alert('Marketplace contract not deployed to detected network.')
+    }
   }
 
   const onChangePicture = e => {
@@ -66,10 +76,15 @@ export const Collection = () => {
         address:account
       })
       setAssests(response.data)
-      console.log(response.data)
     } catch (e) {
         console.log(e.Error)
     }
+  }
+
+  const mint = async (hash) => {
+    const transaction = await marketplace.methods.mint(hash).send({from: account})
+    console.log(transaction.transactionHash)
+    return transaction;
   }
 
   const handleClickOpen = () => {
@@ -83,11 +98,14 @@ export const Collection = () => {
   const handleClickClose = () => {
     setOpen(false);
   };
+
+  const lengthReturn = async () => {
+    const lengths = await marketplace.methods.lengthReturn().call()
+    return lengths
+  }
  
   const Assets = (
-    assets.map(item => {
-      console.log("item........ ", item)
-      
+    assets.map(item => {  
      return (
         <div className="card token-card2 mr-4 mt-5 mb-5">
           <img src={`http://localhost:8000/${item.image}`} className="mt-3 token-image"/>
@@ -127,30 +145,47 @@ export const Collection = () => {
     image.append("image", picture)
     image.append("description", description)
     image.append("address", account)
+    image.append("price",price)
 
-    let response;
-    try {
-      response = await axios.post(`${SERVER_API_LINK}create`, image)
-    } catch (e) {
-        console.log(e.Error)
-    }
+    const minting = await mint(hash)
+    console.log(minting)
 
-    console.log('res',response.data)
-    if(response.data.success !== false) {
-      setIsMessage(true)
-      setMessageType("success")
-      setmessage(" Token Created Successfully")
-      setTimeout(() => {
-        setIsMessage(false) ;
-      }, 1500);
-    } else {  
+    if (minting.transactionHash !== '') {
+      let response;
+      const token_id = await lengthReturn()
+      console.log("token id",token_id)
+      image.append("token_id",token_id)
+      try {
+        response = await axios.post(`${SERVER_API_LINK}create`, image)
+        console.log(response)
+      } catch (e) {
+          console.log(e.Error)
+      }
+      console.log(response)
+      if(response == null ) {
+        setIsMessage(true)
+        setMessageType("success")
+        setmessage(" Token Created Successfully")
+        setTimeout(() => {
+          setIsMessage(false) ;
+        }, 1500);
+      } else {  
+        setIsMessage(true)
+        setMessageType("warning")
+        setmessage(" This Token Already Exists ")
+        setTimeout(() => {
+          setIsMessage(false) ;
+        }, 1500);
+      }
+    } else {
       setIsMessage(true)
       setMessageType("warning")
-      setmessage(" This Token Already Exists ")
+      setmessage(" Transaction failed ")
       setTimeout(() => {
         setIsMessage(false) ;
       }, 1500);
-    }  
+    }
+      
   }
   
   return (
@@ -200,6 +235,12 @@ export const Collection = () => {
                 placeholder="Example: Treasures of the Sea" 
                 className="input-text"
                 onChange={e => setName(e.target.value)}/>
+              <label className="black" style={{marginTop:'20px'}}>price*</label>
+              <input 
+                type="text" 
+                placeholder="Price: in Eth" 
+                className="input-text"
+                onChange={e => setPrice(e.target.value)}/>
               <label className="black" style={{marginTop:'13px'}}>Description*</label>
               <textarea 
                 placeholder="Provide a description for your store. Markdown syntax is supported" 

@@ -51,7 +51,7 @@ export const TokenPage = () => {
               </div>
               <div className="col-lg-4 right-text ">
                 <span style={{color:"rgb(138, 147, 155)"}}>price</span>
-                <span style={{whiteSpace :"nowrap"}} > <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="15%"></img> 0.036</span>
+                <span style={{whiteSpace :"nowrap"}} > <img src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" width="15%"></img> {item.price} </span>
               </div>
               <button className="buy-now mt-3">Buy Now</button>
             </div>
