@@ -11,7 +11,7 @@ contract Wnft is ERC721 {
     constructor() ERC721("MyCollectible", "MCO") {
     }
 
-    function mint(string memory _collectible) public {
+    function mint(string memory _collectible) public  {
         // Check whether collectible is present
         require(!_collectibleExists[_collectible]);
         // require collectibles
@@ -23,5 +23,13 @@ contract Wnft is ERC721 {
 
     function lengthReturn() public view returns(uint) {
         return collectibles.length;
+    }
+
+    function tokenTransfer(address _to, uint _id) public {
+        // check if the reciever and sender is same 
+        require(msg.sender!= _to);
+        // check if the token _id is valid
+        require(_id <= lengthReturn());
+        safeTransferFrom(msg.sender, _to, _id);
     }
 }

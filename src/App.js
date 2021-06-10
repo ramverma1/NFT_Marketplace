@@ -40,12 +40,14 @@ function App() {
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
     if(networkData) {
-      const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
-      setMarketplace(marketplace)
+      const market_place = new web3.eth.Contract(Marketplace.abi, networkData.address)
+      setMarketplace(market_place)
     } else {
-      // window.alert('Marketplace contract not deployed to detected network.')
+      window.alert('Marketplace contract not deployed to detected network.')
     }
   }
+
+  
 
   return (
     <div className="App">

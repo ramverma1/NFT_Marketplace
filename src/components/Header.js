@@ -35,7 +35,6 @@ export const Header = () => {
     setAccount(accounts[0])
     const bal = await web3.eth.getBalance(accounts[0])
     const getbalance = web3.utils.fromWei(new web3.utils.BN(bal),'ETHER')
-    console.log(getbalance)
     setBalance(getbalance)
   }
 
